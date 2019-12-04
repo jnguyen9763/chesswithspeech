@@ -1,3 +1,7 @@
+// Gloria Kitchens and Jacqueline Nguyen
+// gloria.kitchens@tufts.edu and jacqueline.nguyen@tufts.edu
+// handles speech commands
+
 var coordinates = [];
 var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 var numbers = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -63,18 +67,22 @@ function checkCommand(command) {
             target = results[0];
             secondCoord = true;
         }
+        // handles if user says one coordinate and then another coordinate
         if (target === undefined && coordinates.includes(source.split('').join(' '))) {
             secondCoord = false;
         }
+        // restarts the game
         if (source === 'new' && target === 'game') {
             location.reload(false);
         }
+        // changes the game movement (can be either fast or slow)
         else if (source === 'move' && (target === 'fast' || target === 'slow')) {
             config.position = board.position();
             config.moveSpeed = target;
             board = Chessboard('board', config);
             fixOrientation();
         }
+        // flips board
         else if (source === 'rotate' && target === 'board') {
             board.orientation('flip');
         }
@@ -82,6 +90,7 @@ function checkCommand(command) {
             enableFlipping = !enableFlipping;
             if (enableFlipping) fixOrientation();
         }
+        // handles if user says two coordinates
         else if (secondCoord) {
             board.move(source + '-' + target);
         }
@@ -90,6 +99,7 @@ function checkCommand(command) {
     return false;
 }
 
+// changes orientation to whoever's turn it is
 function fixOrientation() {
     if (currPlayer === 'b') {
         board.orientation('black');
