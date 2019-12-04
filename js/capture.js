@@ -23,7 +23,6 @@ function showCapturedPiece(piece) {
 }
 
 function displayPreviousMove(color, move) {
-    console.log(color, move)
     if (color === 'w') {
         whiteMove.innerHTML = move;
     }

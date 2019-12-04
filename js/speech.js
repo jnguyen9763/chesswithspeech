@@ -1,7 +1,22 @@
+var coordinates = [];
+var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+var numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+for (var i = 0; i < letters.length; i++) {
+    for (var j = 0; j < letters.length; j++) {
+        coordinates.push(letters[i] + ' ' + numbers[j]);
+    }
+}
+var grammar = '#JSGF V1.0; grammar colors; public <color> = ' + coordinates.join(' | ') + ' ;'
+
+
 var recognizing, currPlayer;
+var secondCoord = true;
 var index = 0;
 var source = '', target = '';
 var recognition = new webkitSpeechRecognition();
+var speechRecognitionList = new webkitSpeechGrammarList();
+speechRecognitionList.addFromString(grammar, 1);
+recognition.grammars = speechRecognitionList;
 recognition.continuous = true;
 recognition.interimResults = true;
 reset();
@@ -40,9 +55,18 @@ function checkCommand(command) {
     if (command !== '') {
         // source: https://stackoverflow.com/questions/64904/parsings-strings-extracting-words-and-phrases-javascript
         var results = command.toLowerCase().match(/("[^"]+"|[^"\s]+)/g);
-        source = results[0];
-        target = results[1];
-  
+        if (secondCoord) {
+            source = results[0];
+            target = results[1];
+        }
+        else if (coordinates.includes(results[0].split('').join(' '))) {
+            target = results[0];
+            secondCoord = true;
+        }
+        if (target === undefined && coordinates.includes(source.split('').join(' '))) {
+            console.log('test');
+            secondCoord = false;
+        }
         if (source === 'new' && target === 'game') {
             location.reload(false);
         }
@@ -59,7 +83,7 @@ function checkCommand(command) {
             enableFlipping = !enableFlipping;
             if (enableFlipping) fixOrientation();
         }
-        else {
+        else if (secondCoord) {
             board.move(source + '-' + target);
         }
         return true;
