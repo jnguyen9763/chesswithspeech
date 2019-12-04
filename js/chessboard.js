@@ -77,5 +77,3 @@ var config = {
 board = Chessboard('board', config);
 
 updateStatus();
-
-// document.getElementById('test').innerHTML = '<img src="img/chesspieces/wikipedia/bB.png"/>'
