@@ -64,7 +64,6 @@ function checkCommand(command) {
             secondCoord = true;
         }
         if (target === undefined && coordinates.includes(source.split('').join(' '))) {
-            console.log('test');
             secondCoord = false;
         }
         if (source === 'new' && target === 'game') {
