@@ -1,3 +1,8 @@
+// Gloria Kitchens and Jacqueline Nguyen
+// gloria.kitchens@tufts.edu and jacqueline.nguyen@tufts.edu
+// handles assigning players the pieces that they capture
+// and displaying previous moves
+
 var whiteMove = document.querySelector("#left h3");
 var blackMove = document.querySelector("#right h3");
 var white = document.querySelectorAll("#white > .col");
@@ -9,6 +14,7 @@ var piece = {
     p: ''
 }
 
+// adds captured piece to player's side
 function showCapturedPiece(piece) {
     if (piece.color === 'w') {
         black[blackIndex].innerHTML = 
@@ -22,6 +28,7 @@ function showCapturedPiece(piece) {
     }
 }
 
+// adds player's move to their respective side
 function displayPreviousMove(color, move) {
     if (color === 'w') {
         whiteMove.innerHTML = move;
