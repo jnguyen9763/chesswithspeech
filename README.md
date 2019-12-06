@@ -1,8 +1,6 @@
 # chesswithspeech
 Gloria Kitchens
 Jacqueline Nguyen
-gloria.kitchens@tufts.edu
-jacqueline.nguyen@tufts.edu
 COMP86
 Homework 11
 
